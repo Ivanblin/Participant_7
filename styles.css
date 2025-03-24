@@ -1,0 +1,425 @@
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: italic;
+  color: #474A51;
+  padding-top: 60px;
+}
+/* Основной контент */
+.content {
+  padding: 30px;
+}
+
+/* Раздел рецепта */
+.recipe {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden; /* Обрезаем элементы, выходящие за границы */
+  margin-bottom: 30px; /* Отступ между рецептами */
+}
+
+/* Изображение рецепта */
+.recipe-image {
+  filter: blur(3px);
+  width: 40%; /* Немного уменьшаем изображение */
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease; /* Плавное изменение масштаба */
+}
+
+.recipe:hover .recipe-image {
+  transform: scale(1.05); /* Увеличиваем изображение при наведении */
+  filter: none;
+}
+
+/* Секция описания */
+.description-section {
+  margin-bottom: 30px;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.description-section h3 {
+  font-size: 1.4em;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 500;
+  position: relative;
+  padding-left: 0;
+}
+
+/* Убираем кружок */
+.description-section h3::before {
+  display: none;
+}
+
+.description-section summary {
+  font-size: 1.1em;
+  color: #555;
+  line-height: 1.5;
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 20px; /* Увеличиваем отступы */
+  background-color: #f8f9fa; /* Светлый фон для кнопки */
+  border-radius: 8px; /* Больше скругления углов */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Плавные переходы */
+  margin-bottom: 12px; /* Отделяем от остального контента */
+  display: block; /* Важно! Делаем блочным элементом */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Легкая тень */
+  border: 1px solid rgba(66, 170, 255, 0.2);
+}
+
+.description-section summary:hover {
+  background-color: #eee; /* Более темный фон при наведении */
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1); /* Тень при наведении */
+}
+
+/* Убираем стандартный треугольник в Chrome */
+.description-section summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Добавляем свой значок разворачивания */
+.description-section summary::before {
+  content: "\f078"; /* Код иконки Font Awesome (стрелка вниз) */
+  font-family: FontAwesome;
+  display: inline-block;
+  margin-right: 8px;
+  color: #7FC7FF; /* Более темный цвет для стрелки */
+  transition: transform 0.3s ease;
+}
+
+/* Поворачиваем значок при раскрытии */
+.description-section details[open] > summary::before {
+  transform: rotate(180deg); /* Поворот на 180 градусов */
+}
+
+.description-section p {
+  font-size: 1.1em;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 0;
+  padding-top: 10px;
+}
+
+/* Содержимое рецепта */
+.recipe-content {
+  width: 55%; /* Увеличиваем область для текста */
+  padding: 30px;
+}
+
+/* Заголовок рецепта */
+.recipe-content h2 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: #474A51;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+/* Описание */
+.recipe-content h3 {
+  font-size: 1.5em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #474A51;
+}
+
+.recipe-content p {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Ингредиенты */
+.recipe-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recipe-content ul li {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 8px;
+  padding-left: 25px;
+  position: relative; /* Для позиционирования маркера */
+}
+
+.recipe-content ul li::before {
+  content: "✓"; /* Маркер */
+  position: absolute;
+  left: 0;
+  color: #7FC7FF; /* Зеленый цвет маркера */
+}
+
+/* Приготовление */
+.recipe-content ol.style-list {
+  list-style: none; /* Убираем стандартные маркеры */
+  padding: 35px; /* Увеличиваем внутренний отступ */
+  border-radius: 15px; /* Больше скругления углов */
+  background-color: #f8f9fa; /* Очень светлый фон */
+  color: #555;
+  font-size: 1.15em;
+  margin-top: 25px;
+  counter-reset: step-counter; /* Инициализируем счетчик */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Улучшенная тень */
+  position: relative;
+  border: 1px solid rgba(66, 170, 255, 0.2); /* Очень легкая рамка */
+}
+
+/* Заголовок "Как приготовить" */
+.recipe-content h3 {
+  font-size: 1.6em;
+  margin-bottom: 15px;
+  color: #474A51;
+  font-weight: 500;
+}
+
+.recipe-content ol.style-list li {
+  margin-bottom: 22px; /* Немного больше отступ между пунктами */
+  padding-left: 55px; /* Увеличиваем отступ для номера шага */
+  position: relative;
+  line-height: 1.7; /* Улучшаем читаемость */
+  display: flex; /* Используем flexbox для выравнивания */
+  align-items: center; /* Выравниваем элементы по центру вертикали */
+  transition: all 0.3s ease; /* Плавный переход для эффектов */
+}
+
+.recipe-content ol.style-list li:hover {
+  transform: translateX(3px); /* Меньший сдвиг при наведении */
+  background-color: rgba(66, 170, 255, 0.03); /* Легкий оттенок при наведении */
+}
+
+.recipe-content ol.style-list li::before {
+  content: counter(step-counter); /* Номер шага */
+  counter-increment: step-counter;
+  position: absolute;
+  top: 50%; /* Выравниваем по центру вертикали */
+  left: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #fff; /* Белый фон для номера */
+  color: #7FC7FF; /* Новый акцентный цвет для номера */
+  font-weight: 600;
+  text-align: center;
+  line-height: 35px;
+  font-size: 0.95em;
+  border: 2px solid #7FC7FF; /* Новая рамка для номера */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Более деликатная тень */
+  transform: translateY(-50%); /* Корректируем смещение */
+  transition: all 0.3s ease; /* Плавный переход для эффектов */
+}
+
+.recipe-content ol.style-list li:hover::before {
+  transform: scale(1.1) translateY(-50%); /* Небольшое увеличение при наведении */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Усиленная тень при наведении */
+  background-color: #7FC7FF; /* Новый акцентный фон при наведении */
+  color: #fff; /* Белый цвет номера при наведении */
+}
+
+/* Убираем отступ у последнего элемента */
+.recipe-content ol.style-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Основные стили для меню */
+.menu {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+/* Стили для списка ссылок */
+.menu-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around; /* Равномерное распределение элементов */
+  align-items: center; /* Вертикальное выравнивание */
+  height: 60px; /* Высота меню */
+}
+
+/* Стили для элементов списка */
+.menu-links li {
+  position: relative; /* Для позиционирования подменю */
+}
+
+/* Стили для ссылок */
+.menu-links a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-links a:hover {
+  background-color: #f0f0f0;
+  color: #42AAFF;
+}
+
+/* Стили для подменю (скрыто по умолчанию) */
+.submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Отображение подменю при наведении */
+.menu-links li:hover > .submenu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Стили для ссылок подменю */
+.submenu a {
+  padding: 10px 15px;
+  display: block;
+  color: #555;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.submenu a:hover {
+  background-color: #e0e0e0;
+  color: #42AAFF;
+}
+
+/* Таблица пищевой ценности */
+.nutrition {
+  margin-bottom: 50px;
+  position: relative; /* Для позиционирования заголовка */
+}
+
+.nutrition h2 {
+  font-size: 2.2em; /* Увеличиваем размер шрифта */
+  color: #333;
+  margin-bottom: 30px; /* Больше отступ снизу */
+  text-align: left; /* Выравниваем заголовок по левому краю */
+  padding-left: 20px; /* Отступ слева */
+  font-weight: 600; /* Делаем шрифт полужирным */
+  letter-spacing: 0.02em; /* Небольшой кернинг */
+  position: relative;
+}
+
+/* Декоративная линия под заголовком */
+.nutrition h2::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  bottom: -10px;
+  width: 50px;
+  height: 4px;
+  background-color: #7FC7FF; /* Акцентный цвет */
+  border-radius: 2px;
+}
+
+.nutrition table {
+  width: 100%;
+  border-collapse: separate; /* Важно для раздельных границ */
+  border-spacing: 0; /* Убираем стандартные отступы между ячейками */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Улучшенная тень */
+  border-radius: 12px; /* Более скругленные углы */
+  overflow: hidden; /* Обрезаем выходящее содержимое */
+  background-color: #fff;
+}
+
+/* Заголовки столбцов */
+.nutrition thead {
+  background: linear-gradient(135deg, #7FC7FF, #7FC7FF); /* Градиентный фон */
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Тень для текста */
+}
+
+.nutrition th {
+  padding: 20px 25px; /* Увеличиваем внутренние отступы */
+  text-align: left;
+  font-size: 1.2em; /* Увеличиваем размер шрифта */
+  font-weight: 500; /* Делаем шрифт менее жирным */
+  letter-spacing: 0.04em; /* Небольшой кернинг */
+  text-transform: none; /* Убираем преобразование в верхний регистр */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Светлая линия под заголовками */
+}
+
+/* Ячейки данных */
+.nutrition td {
+  padding: 20px 25px; /* Увеличиваем внутренние отступы */
+  text-align: left;
+  font-size: 1.1em; /* Увеличиваем размер шрифта */
+  color: #555; /* Делаем цвет текста менее темным */
+}
+
+/* Чередование фона строк */
+.nutrition tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Очень светлый фон для четных строк */
+}
+
+/* Эффект при наведении на строку */
+.nutrition tbody tr:hover {
+  background-color: rgba(240, 240, 240, 0.8); /* Полупрозрачный фон при наведении */
+  transform: translateY(-3px); /* Больший подъем строки */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Более сильная тень */
+  transition: all 0.3s ease-in-out; /* Плавная анимация */
+}
+
+/* Выделение первого столбца (название продукта) */
+.nutrition td:first-child {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Дополнительные стили для границ ячеек */
+.nutrition td,
+.nutrition th {
+  border: none; /* Убираем стандартные границы */
+}
+
+.nutrition tbody tr {
+  position: relative; /* Для псевдоэлемента-разделителя */
+}
+
+/* Псевдоэлемент для разделителя строк */
+.nutrition tbody tr::after {
+  content: "";
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: 0;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.05); /* Очень светлая линия */
+}
+
+
+/* Стили для ссылок категорий (Завтраки, Основные блюда, Десерты) */
+.content h2 a {
+  color: #474A51; /* Голубой цвет текста */
+  text-decoration: none; /* Убираем подчеркивание */
+  font-weight: bold; /* Жирный шрифт */
+  font-size: 1.5em; /* Размер шрифта */
+  display: block; /* Занимает всю ширину */
+  padding: 10px 15px; /* Отступы вокруг текста */
+  border-left: 5px solid #42AAFF; /* Вертикальная линия слева */
+  transition: color 0.3s ease, border-color 0.3s ease; /* Плавные переходы */
+}
